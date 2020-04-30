@@ -1,0 +1,27 @@
+
+
+<input [disabled]="true">
+<input [attr.disabled]="'disabled'">
+{{IsRequired()}}
+
+<input id="name" name="name" class="form-control"
+       [required]="IsRequired()"
+      minlength="{{ml}}" appForbiddenName="bob"
+      [(ngModel)]="name1" #name2="ngModel" >
+
+{{name1}}
+
+<div *ngIf="name2.invalid && (name2.dirty || name2.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="name2.errors.required">
+    Name is required.
+  </div>
+  <div *ngIf="name2.errors.minlength">
+    Name must be at least {{ml}} characters long.
+  </div>
+  <div *ngIf="name2.errors.forbiddenName">
+    Name cannot be Bob.
+  </div>
+
+</div>
